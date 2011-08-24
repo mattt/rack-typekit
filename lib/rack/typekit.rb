@@ -1,10 +1,10 @@
 require 'rack'
 
 module Rack #:nodoc:
-  class TypeKit
+  class Typekit
 
     def initialize(app, options = {})
-      raise ArgumentError, "TypeKit Kit ID Required" unless options[:kit] and !options[:kit].empty?
+      raise ArgumentError, "Typekit Kit ID Required" unless options[:kit] and !options[:kit].empty?
       @app, @options = app, options
     end
 
