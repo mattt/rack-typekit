@@ -6,7 +6,7 @@ Rack middleware to automatically include your Typekit JavaScript files
 
   require 'rack/typekit'
   
-  use Rack::TypeKit, :kit => 'lng5bpe'
+  use Rack::Typekit, :kit => 'lng5bpe'
   
 Including this in the <tt>config.ru</tt> file of your Rack application will automatically inject the corresponding JavaScript into the <tt><head></tt> of your HTML:
 
