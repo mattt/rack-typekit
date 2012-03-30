@@ -14,7 +14,7 @@ module Rack #:nodoc:
       return [@status, @headers, @response] unless html?
       response = Rack::Response.new([], @status, @headers)
       if @response.respond_to?(:to_ary)
-        @response.each { |fragment| response.write inject(fragment) }
+        @response.each { |fragment| response.write inject_typekit(fragment) }
       end
       response.finish
     end
@@ -23,10 +23,10 @@ module Rack #:nodoc:
 
     def html?; @headers["Content-Type"] =~ /html/; end
 
-    def inject(response)
+    def inject_typekit(response)
       script = <<-EOF
-<script type="text/javascript" src="http://use.typekit.com/#{@options[:kit]}.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script src="//use.typekit.com/#{@options[:kit]}.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
       EOF
 
       response.gsub(%r{</head>}, script + "</head>")
