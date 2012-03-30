@@ -1,28 +1,27 @@
-require 'rack'
-
 module Rack #:nodoc:
   class Typekit
-    
+
     VERSION = "0.1.0"
 
     def initialize(app, options = {})
-      raise ArgumentError, "Typekit Kit ID Required" unless options[:kit] and !options[:kit].empty?
+      raise ArgumentError, "Typekit Kit ID Required" unless options[:kit] &&
+        !options[:kit].empty?
       @app, @options = app, options
     end
 
-    def call(env); dup._call(env); end
-
-    def _call(env)
+    def call(env)
       @status, @headers, @response = @app.call(env)
       return [@status, @headers, @response] unless html?
       response = Rack::Response.new([], @status, @headers)
-      @response.each { |fragment| response.write inject(fragment) }
+      if @response.respond_to?(:to_ary)
+        @response.each { |fragment| response.write inject(fragment) }
+      end
       response.finish
     end
 
-  private
+    private
 
-    def html?; @headers['Content-Type'] =~ /html/; end
+    def html?; @headers["Content-Type"] =~ /html/; end
 
     def inject(response)
       script = <<-EOF
