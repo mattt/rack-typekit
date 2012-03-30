@@ -1,22 +1,22 @@
-= rack-typekit
+# rack-typekit
 
 Rack middleware to automatically include your Typekit JavaScript files
 
-== Example
+## Example
 
-  require 'rack/typekit'
+```ruby
+require "rack/typekit"
   
-  use Rack::Typekit, :kit => 'lng5bpe'
+use Rack::Typekit, :kit => "lng5bpe"
+```
   
-Including this in the <tt>config.ru</tt> file of your Rack application will automatically inject the corresponding JavaScript into the <tt><head></tt> of your HTML:
+Including this in the `config.ru` file of your Rack application will automatically inject the corresponding JavaScript into the `<head>` of your HTML:
 
-  <script src="http://use.typekit.com/lng5bpe.js" type="text/javascript"></script><script type="text/javascript">
-        //<![CDATA[
-          try{Typekit.load();}catch(e){}
-        //]]>
-      </script>
-  <script type="text/javascript">
+```html
+<script src="//use.typekit.com/lng5bpe.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+```
 
-== License
+## License
 
 rack-typekit is available under the MIT license. See the LICENSE file for more info.
