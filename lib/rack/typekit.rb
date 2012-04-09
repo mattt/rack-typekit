@@ -1,7 +1,7 @@
 module Rack #:nodoc:
   class Typekit
 
-    VERSION = "0.1.0"
+    VERSION = "0.2.0"
 
     def initialize(app, options = {})
       raise ArgumentError, "Typekit Kit ID Required" unless options[:kit] &&
